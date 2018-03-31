@@ -1,10 +1,16 @@
 const path = require('path');
+
+let entryDir = path.join(__dirname, 'src', 'ts', 'renderer');
 module.exports = {
   mode: 'development',
-  entry: path.join(__dirname, 'src', 'ts', 'renderer', 'Application.ts'),
+  entry: {
+    // lib: path.join(entryDir, 'Application.ts'),
+    renderer: path.join(entryDir, 'renderer.ts'),
+    index: path.join(entryDir, 'index.ts'),
+  },
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'app', 'js')
+    path: path.resolve(__dirname, 'app', 'js'),
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -40,7 +46,7 @@ module.exports = {
     //   path.resolve(__dirname, "app")
     // ],
     extensions: [
-      '.json', '.css', 'html', 'ts', 'js'
+      '.json', '.css', '.html', '.ts', '.js'
     ]
   },
   devtool: 'source-map',
