@@ -23,6 +23,14 @@ module.exports = {
         // query: {
         //   presets: ['es2015']
         // }
+      },
+      {
+        test: /.js$/,
+        include: [
+          path.resolve(__dirname, 'src', 'ts')
+          // path.resolve(__dirname, 'app', 'js', 'renderer.js')
+        ],
+        use: 'es6-loader'
       }
     ]
   },

@@ -20,9 +20,11 @@
     "@types/jqueryui": "^1.12.2",
     "@types/knockout": "^3.4.52",
     "@types/tether": "^1.4.3",
+    "@types/typeahead": "^0.11.32",
     "css-loader": "^0.28.11",
     "electron": "^1.8.4",
     "electron-packager": "^11.1.0",
+    "es6-loader": "^0.2.0",
     "html-loader": "^0.5.5",
     "ts-loader": "^4.1.0",
     "typescript": "^2.7.2",
@@ -35,6 +37,7 @@
     "jquery-ui": "^1.12.1",
     "knockout": "^3.4.2",
     "tether": "^1.4.3",
+    "typeahead.js": "^0.11.1",
     "wijmo": "^5.20181.436"
   }
 }

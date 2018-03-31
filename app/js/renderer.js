@@ -5,11 +5,35 @@
 const jquery = require('jquery');
 window.$ = window.jQuery = jquery;
 
-const tether = require('tether');
-window.Tether = tether;
+require("bootstrap");
 
-const bootstrap = require('bootstrap');
-window.Bootstrap = bootstrap;
+// require("typeahead.js");
+// require("typeahead.js/dist/typeahead.jquery.js");
+// const Bloodhound = require("typeahead.js/dist/bloodhound.js");
+// // const Bloodhound = require("typeahead.js/dist/typeahead.bundle.js");
+// window.Bloodhound = Bloodhound;
+
+
+
+
+
+
+
+
+
+
+// const jquery = require('jquery');
+// window.$ = window.jQuery = jquery;
+
+// const tether = require('tether');
+// window.Tether = tether;
+
+// require('bootstrap/dist/js/bootstrap');
+
+// const bootstrap = require('bootstrap');
+// window.Bootstrap = bootstrap;
+
+// const typeahead = require("typeahead.js");
 
 
 // let jquery = require('jquery');
