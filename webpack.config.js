@@ -23,20 +23,36 @@ module.exports = {
         // include: [
         //   path.resolve(__dirname, 'src', 'ts'),
         // ],
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: { sourceMap: true },
-            },
-            {
-              loader: 'postcss-loader',
-              options: { sourceMap: true },
-            },
-          ],
-        }),
+        use: [
+          {
+            loader: 'style-loader',
+            // options: { sourceMap: true },
+          },
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true },
+          },
+        ],
       },
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: [
+      //       {
+      //         loader: 'css-loader',
+      //         options: { sourceMap: true },
+      //       },
+      //       {
+      //         loader: 'postcss-loader',
+      //         options: { sourceMap: true },
+      //       },
+      //     ],
+      //   }),
+      // },
+
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract("css-loader!postcss-loader")
+      // },
       {
         test: /\.js$/,
         include: [
@@ -64,22 +80,22 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor/bundle",
-      minChunks: function (module) {
-        // node_modules のディレクトリ下に含まれるものだけに絞る
-        return module.context && module.context.indexOf("node_modules") !== -1;
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor/manifest", // 名前は "manifest" でないとダメ
-      minChunks: Infinity // entryがいくつあろうと生成。省略可
-    }),
     // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor/bundle',
-    //   chunks: ['vendor/modules', 'index'],
-    //   // path.resolve('app', 'js', 'vender', 'vendor.js')
+    //   name: "vendor/bundle",
+    //   minChunks: function (module) {
+    //     // node_modules のディレクトリ下に含まれるものだけに絞る
+    //     return module.context && module.context.indexOf("node_modules") !== -1;
+    //   }
     // }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: "vendor/manifest", // 名前は "manifest" でないとダメ
+    //   minChunks: Infinity // entryがいくつあろうと生成。省略可
+    // }),
+    // // new webpack.optimize.CommonsChunkPlugin({
+    // //   name: 'vendor/bundle',
+    // //   chunks: ['vendor/modules', 'index'],
+    // //   // path.resolve('app', 'js', 'vender', 'vendor.js')
+    // // }),
 
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -88,12 +104,27 @@ module.exports = {
       // 'window.Bloodhound': 'typeahead.js',
       Bloodhound: 'typeahead.js',
     }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
 
-    }),
-    // new ExtractTextPlugin(path.join(__dirname, 'app', 'css', '[name].css')),
+    // new ExtractTextPlugin({
+    //   filename: '[name].css',
+
+    // }),
+    // // new ExtractTextPlugin(path.join(__dirname, 'app', 'css', '[name].css')),
   ],
+
+  // postcss: [
+  //   require('autoprefixer')
+  // ],
+  // postcss: function () {
+  //   return [
+  //     atImport(),
+  //     customMedia(),
+  //     customProperties(),
+  //     calc(),
+  //     autoprefixer({ browsers: ["last 2 versions"] })
+  //   ];
+  // },
+
   devtool: 'source-map',
 };
 
