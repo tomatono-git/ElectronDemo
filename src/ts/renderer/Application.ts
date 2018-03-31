@@ -4,6 +4,9 @@ import * as JQueryStatic from "jquery";
 
 declare const window: Window & { $: JQueryStatic<HTMLElement> };
 
+import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+
 export class Application {
 
     public static start(): void {

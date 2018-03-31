@@ -1,3 +1,8 @@
+import "bootstrap";
+
+import "typeahead.js/dist/typeahead.jquery";
+// require("typeahead.js/dist/typeahead.jquery.js");
+
 import { Application } from "./Application";
 
 
