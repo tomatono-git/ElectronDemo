@@ -1,5 +1,7 @@
 // import * as Bloodhound from "bloodhound";
 
+require('Autocomplete.css');
+
 export class Autocomplete {
 
     public initialize(): void {

@@ -1,6 +1,10 @@
-const webpack = require('webpack');
 const path = require('path');
+
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+
 // const HtmlPlguin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const CssEntryPlugin = require('css-entry-webpack-plugin');
 
 // import webpack from 'webpack'
@@ -25,14 +29,38 @@ module.exports = {
   module: {
     rules: [
       {
+        // test: /\.css|scss$/,
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: { sourceMap: true },
+            },
+            {
+              loader: 'postcss-loader',
+              options: { sourceMap: true },
+            },
+            // {
+            //   loader: 'sass-loader',
+            //   options: { sourceMap: true },
+            // },
+          ],
+        }),
+        // loader: ExtractTextPlugin.extract("css-loader!postcss-loader"),
+        // loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+
         // use: ExtractTextPlugin.extract({
         //   fallback: 'style-loader',
         //   use: ['css-loader'],
         //   // use: ['css-loader', 'sass-loader'],
         // }),
       },
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract("css-loader!postcss-loader")
+      // },
       {
         test: /\.js$/,
         include: [
@@ -80,17 +108,33 @@ module.exports = {
       Bloodhound: 'typeahead.js',
     }),
 
-    //   new CssEntryPlugin({
-    //     output: {
-    //       filename: "[name].bundle.css"
-    //     }
-    //   }),
+    // new CssEntryPlugin({
+    //   output: {
+    //     filename: "[name].bundle.css"
+    //   }
+    // }),
+
     //   //   new HtmlPlguin({
     //   //     filename: 'index.html',
     //   //     inject: false,
     //   //     template: resolve('src', 'template', 'index-template.html'),
     //   //   }),
-    //   //   new ExtractTextPlugin('css/app.css'),
+
+    new ExtractTextPlugin('../css/[name].css'),
   ],
+
+  // postcss: [
+  //   require('autoprefixer')
+  // ],
+  // postcss: function () {
+  //   return [
+  //     atImport(),
+  //     customMedia(),
+  //     customProperties(),
+  //     calc(),
+  //     autoprefixer({ browsers: ["last 2 versions"] })
+  //   ];
+  // },
+
   devtool: 'source-map',
 };
