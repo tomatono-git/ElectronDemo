@@ -1,8 +1,9 @@
+
 import { AutocompleteText } from "./view/autocomplete/AutocompleteText";
 
 export class Application {
 
-    public static start(): void {
+    public start(): void {
 
         console.log("$=%o", $);
         let autocomplete = new AutocompleteText();

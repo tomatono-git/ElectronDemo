@@ -1,2 +1,2 @@
 import { Application } from "./Application";
-Application.start();
+new Application().start();
