@@ -1,15 +1,17 @@
 const path = require('path');
 
 const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let entryDir = path.join(__dirname, 'src', 'ts', 'renderer');
 module.exports = {
-  // mode: 'development',
+  mode: 'development',
   entry: {
     // lib: path.join(entryDir, 'Application.ts'),
     'vendor/modules': path.join(entryDir, 'require_modules.ts'),
-    'vendor/bootstrap': 'bootstrap-loader',
+    'vendor/bootstrap': path.join(entryDir, 'require_bootstrap.ts'),
+    // 'vendor/bootstrap': 'bootstrap',
+    // 'vendor/bootstrap': 'bootstrap-loader',
     'index': path.join(entryDir, 'index.ts'),
   },
   output: {
@@ -21,6 +23,14 @@ module.exports = {
   // },
   module: {
     rules: [
+      {
+        test: /.ts$/,
+        include: [
+          path.resolve(__dirname, 'src', 'ts'),
+        ],
+        loader: 'ts-loader',
+        // options: { sourceMap: true },
+      },
       {
         // test: /\.css|scss$/,
         test: /\.css$/,
@@ -34,31 +44,30 @@ module.exports = {
           path.resolve(__dirname, 'node_modules', 'tether'),
           path.resolve(__dirname, 'node_modules', 'wijmo'),
         ],
-        use: [
-          {
-            loader: 'style-loader',
-            // options: { sourceMap: true },
-          },
-          {
-            loader: 'css-loader',
-            options: { sourceMap: true },
-          },
-        ],
+        // use: [
+        //   {
+        //     loader: 'style-loader',
+        //     // options: { sourceMap: true },
+        //   },
+        //   {
+        //     loader: 'css-loader',
+        //     options: { sourceMap: true },
+        //   },
+        // ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: { sourceMap: true, },
+            },
+            {
+              loader: 'postcss-loader',
+              options: { sourceMap: true },
+            },
+          ],
+        }),
       },
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [
-      //       {
-      //         loader: 'css-loader',
-      //         options: { sourceMap: true },
-      //       },
-      //       {
-      //         loader: 'postcss-loader',
-      //         options: { sourceMap: true },
-      //       },
-      //     ],
-      //   }),
-      // },
       {
         test: /\.js$/,
         include: [
@@ -66,14 +75,6 @@ module.exports = {
         ],
         loader: "es6-loader",
         options: { sourceMap: true },
-      },
-      {
-        test: /.ts$/,
-        include: [
-          path.resolve(__dirname, 'src', 'ts')
-        ],
-        use: 'ts-loader',
-        // options: { sourceMap: true },
       },
       {
         test: /\.(woff2?|svg)$/,
@@ -100,14 +101,37 @@ module.exports = {
     ],
   },
   resolve: {
+    // enforceExtension: true,
+    // enforceModuleExtension: true,
     extensions: [
-      '.json', '.css', '.html', '.ts', '.js',
+      '.ts', '.js', '.json', 'css',
+      // '.ts', '.js', '.json', '.css', '.html',
     ],
-    modules: [
-      path.resolve('./node_modules')
-    ]
+    // modules: [
+    //   path.resolve('./node_modules')
+    // ]
   },
   plugins: [
+    // new webpack.ProvidePlugin({
+    //   $: "jquery",
+    //   jQuery: "jquery",
+    //   "window.jQuery": "jquery",
+    //   Tether: "tether",
+    //   "window.Tether": "tether",
+    //   Popper: ['popper.js', 'default'],
+    //   Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
+    //   Button: "exports-loader?Button!bootstrap/js/dist/button",
+    //   Carousel: "exports-loader?Carousel!bootstrap/js/dist/carousel",
+    //   Collapse: "exports-loader?Collapse!bootstrap/js/dist/collapse",
+    //   Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+    //   Modal: "exports-loader?Modal!bootstrap/js/dist/modal",
+    //   Popover: "exports-loader?Popover!bootstrap/js/dist/popover",
+    //   Scrollspy: "exports-loader?Scrollspy!bootstrap/js/dist/scrollspy",
+    //   Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
+    //   Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
+    //   Util: "exports-loader?Util!bootstrap/js/dist/util",
+    // }),
+
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: "vendor/bundle",
     //   minChunks: function (module) {
@@ -125,10 +149,10 @@ module.exports = {
     // //   // path.resolve('app', 'js', 'vender', 'vendor.js')
     // // }),
 
-    // new ExtractTextPlugin({
-    //   filename: '[name].css',
+    new ExtractTextPlugin({
+      filename: '[name].css',
+    }),
 
-    // }),
     // // new ExtractTextPlugin(path.join(__dirname, 'app', 'css', '[name].css')),
   ],
 

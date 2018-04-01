@@ -1,6 +1,7 @@
 // import * as Bloodhound from "bloodhound";
 
-require('AutocompleteText.css');
+// require('AutocompleteText.css');
+import './AutocompleteText.css';
 
 export class AutocompleteText {
 
@@ -19,7 +20,7 @@ export class AutocompleteText {
         });
         engine.initialize();
 
-        let optios: Twitter.Typeahead.Options = {
+        let options: Twitter.Typeahead.Options = {
             highlight: true,
             classNames: {
                 menu: "tt-menu tt-menu-ex"
@@ -42,8 +43,9 @@ export class AutocompleteText {
             },
         };
 
-        let autocompleteTarget = $(".autocomplete");
-        autocompleteTarget.typeahead(optios, dataSet);
+        let autocompleteTarget = $(".autocomplete input");
+        console.log("options=%o, dataSet=%o, autocompleteTarget=%o", options, dataSet, autocompleteTarget);
+        autocompleteTarget.typeahead(options, dataSet);
         // typeahead: active
         // autocompleteTarget.on("typeahead:active", (event, args) => {
         //     console.log("on('typeahead:active'): event=%o, args=%o", event, args);

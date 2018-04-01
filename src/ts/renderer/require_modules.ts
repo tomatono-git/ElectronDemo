@@ -1,9 +1,8 @@
-import * as jquery from "jquery";
+// import * as jquery from "jquery";
 
-// import "bootstrap";
+// // import "bootstrap";
 // import 'bootstrap/dist/css/bootstrap.css';
 
-import "typeahead.js/dist/typeahead.jquery";
 
 // import * as Bloodhound from "typeahead.js/dist/bloodhound";
 
@@ -17,7 +16,9 @@ declare const window: Window & {
 // const jquery = jQuery
 // window.$ = window.jQuery = jquery;
 window.$ = window.jQuery = require("jquery");
-window.Bloodhound = require("typeahead.js/dist/typeahead.jquery");
+window.Bloodhound = require("typeahead.js/dist/bloodhound");
+
+import "typeahead.js/dist/typeahead.jquery";
 
 // interface Window {
 //     $: JQueryStatic<HTMLElement>;

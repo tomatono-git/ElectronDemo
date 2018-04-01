@@ -1,5 +1,5 @@
 
-import { AutocompleteText } from "./view/autocomplete/AutocompleteText";
+import { AutocompleteText } from "./view/AutocompleteText/AutocompleteText";
 
 export class Application {
 
