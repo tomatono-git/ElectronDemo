@@ -7,8 +7,8 @@ let entryDir = path.join(__dirname, 'src', 'ts', 'renderer');
 module.exports = {
   mode: 'development',
   entry: {
-    // 'vendor/modules': path.join(entryDir, 'require_modules.ts'),
-    'vendor/bootstrap': path.join(entryDir, 'require_bootstrap.ts'),
+    'vendor/modules': path.join(entryDir, 'require_modules.ts'),
+    // 'vendor/bootstrap': path.join(entryDir, 'require_bootstrap.ts'),
     'index': path.join(entryDir, 'index.ts'),
   },
   output: {
