@@ -7,11 +7,8 @@ let entryDir = path.join(__dirname, 'src', 'ts', 'renderer');
 module.exports = {
   mode: 'development',
   entry: {
-    // lib: path.join(entryDir, 'Application.ts'),
-    'vendor/modules': path.join(entryDir, 'require_modules.ts'),
+    // 'vendor/modules': path.join(entryDir, 'require_modules.ts'),
     'vendor/bootstrap': path.join(entryDir, 'require_bootstrap.ts'),
-    // 'vendor/bootstrap': 'bootstrap',
-    // 'vendor/bootstrap': 'bootstrap-loader',
     'index': path.join(entryDir, 'index.ts'),
   },
   output: {
@@ -90,14 +87,6 @@ module.exports = {
         ],
         loader: 'file-loader'
       },
-      // {
-      //   test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
-      //   include: [
-      //     // path.resolve('node_modules', 'bootstrap-sass'),
-      //     path.resolve(__dirname, 'src', 'ts'),
-      //   ],
-      //   loader: 'file-loader'
-      // },
     ],
   },
   resolve: {
