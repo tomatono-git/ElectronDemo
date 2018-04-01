@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     // lib: path.join(entryDir, 'Application.ts'),
     'vendor/modules': path.join(entryDir, 'require_modules.ts'),
+    'vendor/bootstrap': 'bootstrap-loader',
     'index': path.join(entryDir, 'index.ts'),
   },
   output: {
@@ -26,6 +27,13 @@ module.exports = {
         // include: [
         //   path.resolve(__dirname, 'src', 'ts'),
         // ],
+        include: [
+          path.resolve(__dirname, 'src', 'ts'),
+          path.resolve(__dirname, 'node_modules', 'bootstrap'),
+          path.resolve(__dirname, 'node_modules', 'jquery-ui'),
+          path.resolve(__dirname, 'node_modules', 'tether'),
+          path.resolve(__dirname, 'node_modules', 'wijmo'),
+        ],
         use: [
           {
             loader: 'style-loader',
@@ -67,6 +75,28 @@ module.exports = {
         use: 'ts-loader',
         // options: { sourceMap: true },
       },
+      {
+        test: /\.(woff2?|svg)$/,
+        include: [
+          path.resolve(__dirname, 'node_modules', 'bootstrap'),
+        ],
+        loader: 'url-loader?limit=10000'
+      },
+      {
+        test: /\.(ttf|eot)$/,
+        include: [
+          path.resolve(__dirname, 'node_modules', 'bootstrap'),
+        ],
+        loader: 'file-loader'
+      },
+      // {
+      //   test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+      //   include: [
+      //     // path.resolve('node_modules', 'bootstrap-sass'),
+      //     path.resolve(__dirname, 'src', 'ts'),
+      //   ],
+      //   loader: 'file-loader'
+      // },
     ],
   },
   resolve: {

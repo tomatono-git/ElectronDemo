@@ -1,6 +1,8 @@
 import * as jquery from "jquery";
-import "bootstrap";
-import 'bootstrap/dist/css/bootstrap.css';
+
+// import "bootstrap";
+// import 'bootstrap/dist/css/bootstrap.css';
+
 import "typeahead.js/dist/typeahead.jquery";
 
 // import * as Bloodhound from "typeahead.js/dist/bloodhound";
