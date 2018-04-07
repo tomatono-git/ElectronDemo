@@ -64,6 +64,11 @@ interface ComponentRegisterOptions<T> {
 export class ComponentRegister<T> {
 
     public registerComponent(componentName: string, template: any): void {
+
+        if (ko.components.isRegistered(componentName)) {
+            return;
+        }
+
         ko.components.register(componentName, {
             template: template,
             viewModel: {
