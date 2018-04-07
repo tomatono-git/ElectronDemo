@@ -52,7 +52,7 @@ type ComponentTemplate = string | Node[] | DocumentFragment | ComponentTypes.Tem
 interface ComponentRegisterOptions<T> {
     // componentName: string,
     // viewModel?: ComponentTypes.ViewModelFactoryFunction;
-    templatePath?: string;
+    // templatePath?: string;
     template: string | Node[] | DocumentFragment | ComponentTypes.TemplateElement;
     cssPaths?: string[];
     synchronous?: boolean;
@@ -63,7 +63,10 @@ interface ComponentRegisterOptions<T> {
 
 export class ComponentRegister<T> {
 
-    public registerComponent(componentName: string, template: any): void {
+    public isRegistered(componentName: string): boolean {
+        return ko.components.isRegistered(componentName);
+    }
+    public register2<T>(componentName: string, template: any): void {
 
         if (ko.components.isRegistered(componentName)) {
             return;
@@ -76,7 +79,7 @@ export class ComponentRegister<T> {
                     element: Node;
                     templateNodes: Node[];
                 }) => {
-                    let vm: any | undefined = undefined;
+                    let vm: T | undefined = undefined;
                     if (params && params.vm) {
                         vm = ko.unwrap(params.option);
                     }
@@ -85,6 +88,80 @@ export class ComponentRegister<T> {
             }
         });
     }
+
+    // public registerComponent(componentName: string, template: any, viewModel: (params?: any, componentInfo?: ComponentTypes.ComponentInfo) => T | undefined): void {
+    public registerComponent(componentName: string, template: any, viewModel: (params?: any, componentInfo?: ComponentTypes.ComponentInfo) => T | undefined): void {
+
+        if (ko.components.isRegistered(componentName)) {
+            return;
+        }
+
+        // let template = options.template;
+        // let factory: (params?: any, componentInfo?: ComponentTypes.ComponentInfo) => T | null;
+        // if (options.createViewModel) {
+        //     factory = options.createViewModel;
+        // } else {
+        //     // // factory = this.createViewModel.bind(this);
+        //     factory = (params?: any, componentInfo?: ComponentTypes.ComponentInfo) => {
+        //         let vm: any | undefined = undefined;
+        //         if (params && params.vm) {
+        //             vm = ko.unwrap(params.option);
+        //         }
+        //         return vm;
+        //         // let vm: T | null = null;
+        //         // if (params != null) {
+        //         //     if (params.vm != null) {
+        //         //         vm = ko.unwrap(params.vm);
+        //         //     } else {
+        //         //         vm = ko.unwrap(params);
+        //         //     }
+        //         // }
+
+        //         // console.log("getViewModel(): vm=%o, params=%o, componentInfo=%o", vm, params, componentInfo);
+
+        //         // if (vm != null && this.onCreateViewModel != null) {
+        //         //     this.onCreateViewModel(params);
+        //         // }
+
+        //         // return vm;
+        //     };
+        // }
+
+        ko.components.register(componentName, {
+            template: template,
+            viewModel: viewModel,
+            // viewModel: {
+            //     createViewModel: (params?: any, componentInfo?: {
+            //         element: Node;
+            //         templateNodes: Node[];
+            //     }) => {
+            //         let vm: any | undefined = undefined;
+            //         if (params && params.vm) {
+            //             vm = ko.unwrap(params.option);
+            //         }
+            //         return vm;
+            //     },
+            // }
+        });
+    }
+
+    // public registerComponent(componentName: string): void {
+    //     ko.components.register(componentName, {
+    //         template: require("./LargeModal.html"),
+    //         viewModel: {
+    //             createViewModel: (params?: any, componentInfo?: {
+    //                 element: Node;
+    //                 templateNodes: Node[];
+    //             }) => {
+    //                 let vm: LargeModal | undefined = undefined;
+    //                 if (params && params.vm) {
+    //                     vm = ko.unwrap(params.option);
+    //                 }
+    //                 return vm;
+    //             },
+    //         }
+    //     });
+    // }
     public register(componentName: string, options: ComponentRegisterOptions<T>): void {
 
         if (ko.components.isRegistered(componentName)) {
