@@ -66,6 +66,14 @@ module.exports = {
         }),
       },
       {
+        test: /\.html$/,
+        include: [
+          path.resolve(__dirname, 'src', 'ts'),
+        ],
+        loader: "html-loader",
+        options: { sourceMap: true },
+      },
+      {
         test: /\.js$/,
         include: [
           path.resolve(__dirname, 'src', 'ts'),
@@ -93,7 +101,7 @@ module.exports = {
     // enforceExtension: true,
     // enforceModuleExtension: true,
     extensions: [
-      '.ts', '.js', '.json', 'css',
+      '.ts', '.js', '.json', 'css', '.html',
       // '.ts', '.js', '.json', '.css', '.html',
     ],
     // modules: [
