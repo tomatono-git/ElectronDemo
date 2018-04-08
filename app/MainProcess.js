@@ -22,7 +22,8 @@ var MainProcess = (function () {
             }
         });
         // Electronの初期化完了後に実行
-        electron_1.app.on("ready", function () {
+        electron_1.app.on("ready", function (launchInfo) {
+            console.log("ready: launchInfo=%o", launchInfo);
             //ウィンドウサイズを1280*720（フレームサイズを含まない）に設定する
             _this.mainWindow = new electron_1.BrowserWindow({
                 title: TITLE,
@@ -39,9 +40,9 @@ var MainProcess = (function () {
             //使用するhtmlファイルを指定する
             // let indexPath = `file://${path.join(__dirname, 'index.html')}`;
             // let indexPath = `file://${path.normalize(path.join(__dirname, 'index.html'))}`;
-            // var indexPath = path.normalize(path.join('./', 'index.html'));
-            var indexPath = path.join(__dirname, 'index.html');
+            // let indexPath = path.normalize(path.join('./', 'index.html'));
             // let indexPath = `file://${path.join('../', 'index.html')}`;
+            var indexPath = path.join(__dirname, 'index.html');
             console.log("indexPath=%s", indexPath);
             _this.mainWindow.loadURL(indexPath);
             // Enable keyboard shortcuts for Developer Tools on various platforms.

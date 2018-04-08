@@ -27,7 +27,9 @@ export class MainProcess {
         });
 
         // Electronの初期化完了後に実行
-        app.on("ready", () => {
+        app.on("ready", (launchInfo) => {
+            console.log("ready: launchInfo=%o", launchInfo);
+
             //ウィンドウサイズを1280*720（フレームサイズを含まない）に設定する
             this.mainWindow = new BrowserWindow({
                 title: TITLE,
