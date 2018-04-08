@@ -1,35 +1,30 @@
+"use strict";
+exports.__esModule = true;
 // import * as fs from "fs";
-import { app, BrowserWindow, globalShortcut, GlobalShortcut } from "electron";
-import * as path from "path";
-import * as os from "os";
-
-const APPLICATION_NAME = 'app-name';
-const TITLE = 'Sample App';
+var electron_1 = require("electron");
+var path = require("path");
+var os = require("os");
+var APPLICATION_NAME = 'app-name';
+var TITLE = 'Sample App';
 // const indexPath = `file://${path.join(__dirname, 'index.html')}`;
-export class MainProcess {
-
-    private mainWindow: BrowserWindow | null;
-
-    constructor() {
+var MainProcess = (function () {
+    function MainProcess() {
         this.mainWindow = null;
     }
-
-    public start(): void {
-
-        app.setName(APPLICATION_NAME);
-
+    MainProcess.prototype.start = function () {
+        var _this = this;
+        electron_1.app.setName(APPLICATION_NAME);
         // app.on('window-all-closed', () => { app.quit() })
         // 全てのウィンドウが閉じたら終了
-        app.on("window-all-closed", () => {
+        electron_1.app.on("window-all-closed", function () {
             if (process.platform != "darwin") {
-                app.quit();
+                electron_1.app.quit();
             }
         });
-
         // Electronの初期化完了後に実行
-        app.on("ready", () => {
+        electron_1.app.on("ready", function () {
             //ウィンドウサイズを1280*720（フレームサイズを含まない）に設定する
-            this.mainWindow = new BrowserWindow({
+            _this.mainWindow = new electron_1.BrowserWindow({
                 title: TITLE,
                 width: 1280,
                 height: 720,
@@ -40,55 +35,51 @@ export class MainProcess {
                     defaultEncoding: 'UTF-8'
                 }
             });
-
-            this.mainWindow.webContents.openDevTools();
-
+            _this.mainWindow.webContents.openDevTools();
             //使用するhtmlファイルを指定する
             // let indexPath = `file://${path.join(__dirname, 'index.html')}`;
             // let indexPath = `file://${path.normalize(path.join(__dirname, 'index.html'))}`;
-            // let indexPath = path.normalize(path.join('./', 'index.html'));
-            // let indexPath = `file://${path.join('../', 'index.html')}`;
+            // var indexPath = path.normalize(path.join('./', 'index.html'));
             var indexPath = path.join(__dirname, 'index.html');
+            // let indexPath = `file://${path.join('../', 'index.html')}`;
             console.log("indexPath=%s", indexPath);
-            this.mainWindow.loadURL(indexPath);
-
+            _this.mainWindow.loadURL(indexPath);
             // Enable keyboard shortcuts for Developer Tools on various platforms.
-            let platform = os.platform();
+            var platform = os.platform();
             if (platform === 'darwin') {
-                globalShortcut.register('Command+Option+I', () => {
-                    if (!this.mainWindow) {
+                electron_1.globalShortcut.register('Command+Option+I', function () {
+                    if (!_this.mainWindow) {
                         return;
                     }
-                    this.mainWindow.webContents.openDevTools();
+                    _this.mainWindow.webContents.openDevTools();
                 });
-            } else if (platform === 'linux' || platform === 'win32') {
-                globalShortcut.register('Control+Shift+I', () => {
-                    if (!this.mainWindow) {
+            }
+            else if (platform === 'linux' || platform === 'win32') {
+                electron_1.globalShortcut.register('Control+Shift+I', function () {
+                    if (!_this.mainWindow) {
                         return;
                     }
-                    this.mainWindow.webContents.openDevTools();
+                    _this.mainWindow.webContents.openDevTools();
                 });
-            };
-
-            this.mainWindow.once('ready-to-show', () => {
-                if (!this.mainWindow) {
+            }
+            ;
+            _this.mainWindow.once('ready-to-show', function () {
+                if (!_this.mainWindow) {
                     return;
                 }
                 // mainWindow.setMenu(null);
-                this.mainWindow.show();
+                _this.mainWindow.show();
             });
-
             // mainWindow.onbeforeunload = (e) => {
             //     // Prevent Command-R from unloading the window contents.
             //     e.returnValue = false;
             // };
-
             // ウィンドウが閉じられたらアプリも終了
-            this.mainWindow.on("closed", () => {
-                this.mainWindow = null;
+            _this.mainWindow.on("closed", function () {
+                _this.mainWindow = null;
             });
         });
-    }
-
-}
-
+    };
+    return MainProcess;
+}());
+exports.MainProcess = MainProcess;

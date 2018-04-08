@@ -1,19 +1,17 @@
 const path = require('path');
-
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let tsDir = path.join(__dirname, 'src', 'ts');
-let rendererDir = path.join(tsDir, 'renderer');
 module.exports = {
   mode: 'development',
   entry: {
-    'main': path.join(tsDir, 'main', 'MainProcess.ts'),
+    'main': path.join(tsDir, 'main', 'main.ts'),
   },
   output: {
     path: path.join(__dirname, 'app'),
     filename: '[name].js',
   },
+  // target: 'node',
   target: 'electron-main',
   module: {
     rules: [
