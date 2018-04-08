@@ -7,6 +7,7 @@
 // const ko = require('knockout-es5');
 
 const ko = require('knockout-es5');
+// import ko from "knockout-es5";
 
 declare namespace ComponentTypes {
     interface TemplateElement {

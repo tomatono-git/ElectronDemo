@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tslint-h": "tslint --help",
     "build": "npm run clean && npm run webpack",
-    "webpack": "webpack --progress --display-error-details",
+    "build-main": "webpack --config webpack.main.config.js --color --progress --display-error-details",
+    "webpack": "webpack --color --progress --display-error-details",
     "electron": "electron .",
     "package": "electron-packager ./app ElectronDemo --platform=win32 --arch=x64 --version=1.8.4",
     "packager": "node electron-pakcager.js"

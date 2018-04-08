@@ -3,18 +3,21 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-let entryDir = path.join(__dirname, 'src', 'ts', 'renderer');
+let tsDir = path.join(__dirname, 'src', 'ts');
+let rendererDir = path.join(tsDir, 'renderer');
 module.exports = {
   mode: 'development',
   entry: {
-    'vendor/modules': path.join(entryDir, 'require_modules.ts'),
+    'main': path.join(tsDir, 'main', 'MainProcess.ts'),
+    'vendor/modules': path.join(rendererDir, 'require_modules.ts'),
     // 'vendor/bootstrap': path.join(entryDir, 'require_bootstrap.ts'),
-    'index': path.join(entryDir, 'index.ts'),
+    'index': path.join(rendererDir, 'index.ts'),
   },
   output: {
     path: path.join(__dirname, 'app', 'dist'),
     filename: '[name].js',
   },
+  target: 'electron-renderer',
   // externals: {
   //   jquery: '$'
   // },
