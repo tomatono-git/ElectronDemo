@@ -61,6 +61,7 @@ export class ComponentRegister<T> {
                             vm = ko.unwrap(params);
                         }
                     }
+                    console.log("register(): params=%o, vm=%o", params, vm);
                     return vm;
                 },
             }
